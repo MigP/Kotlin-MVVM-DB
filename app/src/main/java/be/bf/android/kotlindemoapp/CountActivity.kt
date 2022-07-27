@@ -15,6 +15,6 @@ class CountActivity : AppCompatActivity() {
         setContentView(v.root)
 
         countViewModel.count.observe(this) { v.counter.text = it.toString() }
-        v.inc.setOnClickListener { countViewModel.inc() }
+//        v.inc.setOnClickListener { countViewModel.inc() }
     }
 }

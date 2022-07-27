@@ -6,8 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.asLiveData
+import be.bf.android.kotlindemoapp.dal.dao.UserDao
+import be.bf.android.kotlindemoapp.dal.entities.User
 import be.bf.android.kotlindemoapp.databinding.ActivityMainBinding
-import kotlin.reflect.KClass
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,10 +29,15 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.count.observe(this) {
             Log.d(TAG, "onCreate: $it")
-            binding.helloWorld.text = "${binding.helloWorld.text} + $it"
+            binding.helloWorld.text = "${binding.helloWorld.text} + ${it}"
+        }
+        viewModel.users.observe(this) {
+            Log.d(TAG, "onCreate: $it")
         }
 
-        binding.inc.setOnClickListener { viewModel.inc() }
+//        viewModel.addUser(User("Flavian", "Ovyn"))
+
+//        binding.inc.setOnClickListener { viewModel.inc() }
 
         binding.redirect.setOnClickListener(this::toCounterActivity)
     }

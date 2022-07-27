@@ -17,9 +17,9 @@ class UserDao(private val context: Context) {
         const val COLUMN_PASSWORD = "password"
 
         const val SQL_CREATE_USER = """CREATE TABLE $TABLE_NAME(
-            |${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,
-            |${COLUMN_USERNAME} VARCHAR(255) NOT NULL,
-            |${COLUMN_PASSWORD} VARCHAR(255) NOT NULL)"""
+            ${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+            $COLUMN_USERNAME VARCHAR(255) NOT NULL,
+            $COLUMN_PASSWORD VARCHAR(255) NOT NULL)"""
         const val SQL_UPGRADE_USER = """DROP TABLE $TABLE_NAME"""
     }
     private val helper: DbHelper = DbHelper(context)

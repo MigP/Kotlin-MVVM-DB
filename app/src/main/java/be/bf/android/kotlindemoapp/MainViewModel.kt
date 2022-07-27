@@ -1,14 +1,38 @@
 package be.bf.android.kotlindemoapp
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import be.bf.android.kotlindemoapp.dal.dao.UserDao
+import be.bf.android.kotlindemoapp.dal.entities.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainViewModel(): ViewModel() {
-    private var _count: Int = 0
-    val count: MutableLiveData<Int> = MutableLiveData(_count)
+class MainViewModel(application: Application): AndroidViewModel(application) {
+    private var _count: MutableLiveData<Int> = MutableLiveData(0)
+    val count: LiveData<Int>
+        get() = _count
 
-    fun inc() {
-        _count++;
-        count.value = _count
+    private val _users = mutableListOf<User>()
+    val users: MutableLiveData<List<User>> = MutableLiveData(_users)
+
+    init {
+        viewModelScope.launch {
+            val context = application.applicationContext
+            UserDao(context).findAll().collect {
+                it.onEach { user -> println(user) }
+                users.value = it
+                _count.value = it.size
+            }
+        }
+    }
+
+    fun addUser(user: User) {
+        UserDao(getApplication<Application>().applicationContext).insert(user)
+        _users.add(user)
+        _count.value = _users.size
+        users.value = _users
     }
 }
