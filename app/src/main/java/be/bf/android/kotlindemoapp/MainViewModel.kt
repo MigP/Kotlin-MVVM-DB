@@ -18,7 +18,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             val context = application.applicationContext
             UserDao(context).findAll().collect {
-                it.onEach { user -> println(user) }
+                it.onEach {
+                        user -> println(user)
+                    _users.add(user)
+                }
                 users.value = it
                 _count.value = it.size
             }

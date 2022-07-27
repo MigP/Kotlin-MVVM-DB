@@ -7,10 +7,10 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/hello_world"
+        android:id="@+id/tvEntries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Number of database entries: "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="220dp"
-        android:text="toCounter"
+        android:text="To counter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

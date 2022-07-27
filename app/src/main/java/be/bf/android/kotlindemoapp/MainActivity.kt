@@ -28,11 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.count.observe(this) {
-            Log.d(TAG, "onCreate: $it")
-            binding.helloWorld.text = "${binding.helloWorld.text} + ${it}"
-        }
-        viewModel.users.observe(this) {
-            Log.d(TAG, "onCreate: $it")
+            binding.tvEntries.text = "${binding.tvEntries.text.substring(0, binding.tvEntries.text.indexOf(":") + 1)} ${it}"
         }
 
         var username: String = "Miguel Pinto"
@@ -41,8 +37,6 @@ class MainActivity : AppCompatActivity() {
         binding.inc.setOnClickListener {
             viewModel.addUser(User(username, password))
         }
-
-        binding.redirect.setOnClickListener(this::toCounterActivity)
     }
 
     private fun toCounterActivity(v: View) {
