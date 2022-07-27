@@ -28,7 +28,7 @@ class UserDao(private val context: Context) {
     fun openWritable(): SQLiteDatabase = helper.writableDatabase
 
     fun insert(user: User): Long {
-        return openReadable().use {
+        return openWritable().use {
             val cv = ContentValues().apply {
                 put(Entry.COLUMN_USERNAME, user.username)
                 put(Entry.COLUMN_PASSWORD, user.password)
@@ -37,7 +37,7 @@ class UserDao(private val context: Context) {
         }
     }
     suspend fun findAll(): Flow<List<User>> = flow {
-        openWritable().use {
+        openReadable().use {
             val users = mutableListOf<User>()
             val cursor = it.query(Entry.TABLE_NAME, null, null, null, null, null, null)
             with(cursor) {

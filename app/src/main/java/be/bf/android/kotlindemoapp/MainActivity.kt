@@ -35,9 +35,12 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "onCreate: $it")
         }
 
-//        viewModel.addUser(User("Flavian", "Ovyn"))
+        var username: String = "Miguel Pinto"
+        var password: String = "mig@gmail.com"
 
-//        binding.inc.setOnClickListener { viewModel.inc() }
+        binding.inc.setOnClickListener {
+            viewModel.addUser(User(username, password))
+        }
 
         binding.redirect.setOnClickListener(this::toCounterActivity)
     }

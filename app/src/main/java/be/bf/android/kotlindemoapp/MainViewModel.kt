@@ -4,11 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import be.bf.android.kotlindemoapp.dal.dao.UserDao
 import be.bf.android.kotlindemoapp.dal.entities.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
     private var _count: MutableLiveData<Int> = MutableLiveData(0)
